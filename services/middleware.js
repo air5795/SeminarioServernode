@@ -11,6 +11,7 @@ module.exports={
                 return next(err);
             }
             if (!user) {
+                console.log('no auth')
                 return res.status(401).send({
                     "message": 'No autorizado inicie session'
                 });
@@ -24,6 +25,8 @@ module.exports={
         const token = req.headers['token']
         jwt.verify(token,config.secret, function(err, decoded) {
             if (err) {
+                console.log('erro checktoken')
+                console.log(err)
                 res.status(401).send({
                     "message": 'Error de token'
                 });

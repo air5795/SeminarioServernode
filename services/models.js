@@ -32,23 +32,27 @@ var users = new Schema({
 
 const restaurant = new Schema({
         name: {type:String},
-        owner: {type:String},
+        firstNameOwner: {type:String},
+        lastNameOwner: {type:String},
         nit: {type:String},
         street: {type:String},
-        phone: {type:Number},
+        phone: {type:String},
         latitude: {type:String},
         logitude: {type:String},
         logo: {type:String},
-        createdAt: {type:Date},
+        createdAt: { type: Date, default: Date.now },
         photo: {type:String},
-        menu: 
+        menu: {type:
             [{
                 name: {type:String},
                 price: {type:Number},
-                descrition: {type:String},
-                createdAt: {type:Date},
+                type:{type:String},
                 photo: {type:String},
-            }]
+                createdAt: { type: Date, default: Date.now },
+            }],
+            default:[]},
+        username:{type:String},
+            
 })
 
 users.pre('save', function (next) {
@@ -82,5 +86,6 @@ users.methods.comparePassword = function (passw, cb) {
 };
 
 module.exports = {
-    users:mongoose.model('users', users)
+    users:mongoose.model('users', users),
+    restaurant:mongoose.model('restaurant', restaurant)
 }
